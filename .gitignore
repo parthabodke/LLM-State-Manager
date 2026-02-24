@@ -1,0 +1,9 @@
+backend/__pycache__
+
+backend/test_all_providers.py
+backend/check_gemini_models.py
+backend/utils/
+data
+venv/
+data/
+.env
