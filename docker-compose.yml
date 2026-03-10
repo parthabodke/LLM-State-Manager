@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    container_name: llm_backend
+    env_file: .env
+    volumes:
+      - ./data:/app/data
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build: ./frontend
+    container_name: llm_frontend
+    ports:
+      - "8501:8501"
+    environment:
+      - BACKEND_URL=http://backend:8000
+    # Add these flags to force the connection
+    command: >
+      streamlit run ui.py 
+      --server.port=8501 
+      --server.address=0.0.0.0 
+      --server.enableCORS=false 
+      --server.enableXsrfProtection=false 
+      --browser.gatherUsageStats=false
+    depends_on:
+      - backend

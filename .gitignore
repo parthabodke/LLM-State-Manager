@@ -1,8 +1,7 @@
-__pycache__
-backend/__pycache__
-backend/test_all_providers.py
-backend/check_gemini_models.py
+__pycache__/
+backend/__pycache__/
 backend/utils/
 venv/
 data/
 .env
+*.pyc

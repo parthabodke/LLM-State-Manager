@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import Optional
 
-from .orchestrator import Orchestrator
+from orchestrator import Orchestrator
 
 app = FastAPI(title="LLM State Manager")
 orc = Orchestrator()
@@ -15,6 +15,7 @@ class ChatRequest(BaseModel):
     active_model: str = "gemini-2.5-flash"
     k: int = 5
     last_n: int = 5
+    use_auditor: bool = True
 
 
 @app.post("/chat")
@@ -25,6 +26,7 @@ def chat(req: ChatRequest):
         active_model=req.active_model,
         k=req.k,
         last_n=req.last_n,
+        use_auditor=req.use_auditor,
     )
 
 
