@@ -1,4 +1,4 @@
-# 🧠 LLM State Manager
+# LLM State Manager
 
 > A conversational AI platform with persistent memory, multi-model support, and factual auditing — powered by ChromaDB, Google Gemini, Groq, and OpenAI.
 
@@ -65,34 +65,7 @@ User ──► Streamlit Frontend (ui.py)
 
 ## Quickstart
 
-### Option 1 — Docker (Recommended)
-
-**1. Clone the repo**
-```bash
-git clone https://github.com/parthabodke/LLM-State-Manager.git
-cd LLM-State-Manager
-```
-
-**2. Create your `.env` file** in the project root:
-```env
-GEMINI_API_KEY=your_gemini_key_here
-GROQ_API_KEY=your_groq_key_here
-OPENAI_API_KEY=your_openai_key_here
-```
-
-**3. Start both services**
-```bash
-docker-compose up --build
-```
-
-**4. Open the app**
-- Frontend: http://localhost:8501
-- Backend API: http://localhost:8000
-- API Docs: http://localhost:8000/docs
-
----
-
-### Option 2 — Run Locally (No Docker)
+### Run Locally
 
 **1. Clone and set up environment**
 ```bash
@@ -176,31 +149,6 @@ Click **"Reset Session"** to clear the memory for the current session ID.
 
 ---
 
-## API Endpoints
-
-| Method | Endpoint | Description |
-|---|---|---|
-| `GET` | `/models` | List all available models |
-| `POST` | `/chat` | Send a message, get a response |
-| `POST` | `/reset/{session_id}` | Clear memory for a session |
-| `GET` | `/docs` | Interactive Swagger UI |
-
-### Example Chat Request
-```bash
-curl -X POST http://localhost:8000/chat \
-  -H "Content-Type: application/json" \
-  -d '{
-    "session_id": "my-session",
-    "user_message": "What is the capital of France?",
-    "active_model": "gemini-2.5-flash",
-    "k": 5,
-    "last_n": 5,
-    "use_auditor": true
-  }'
-```
-
----
-
 ## Deployment
 
 The live demo is deployed using:
@@ -210,24 +158,6 @@ The live demo is deployed using:
 | **Backend** | [Render](https://render.com) — Docker Web Service |
 | **Frontend** | [Streamlit Community Cloud](https://share.streamlit.io) |
 | **Memory** | ChromaDB persistent volume on Render |
-
-### Deploy Your Own
-
-**Backend on Render:**
-1. New → Web Service → Connect GitHub repo
-2. Root Directory: `backend`, Environment: `Docker`
-3. Add environment variables: `GEMINI_API_KEY`, `GROQ_API_KEY`, `OPENAI_API_KEY`
-4. Deploy
-
-**Frontend on Streamlit Cloud:**
-1. New app → your repo → `frontend/ui.py`
-2. Advanced Settings → Secrets:
-```toml
-BACKEND_URL = "https://your-render-url.onrender.com"
-GEMINI_API_KEY = "..."
-GROQ_API_KEY = "..."
-OPENAI_API_KEY = "..."
-```
 
 ---
 
@@ -250,9 +180,3 @@ OPENAI_API_KEY = "..."
 - **Vector DB**: ChromaDB (cosine similarity, SQLite metadata)
 - **Auditor**: `gemma-3-4b-it` via Groq
 - **Containerization**: Docker, Docker Compose
-
----
-
-## License
-
-MIT
