@@ -2,8 +2,6 @@
 
 > A conversational AI platform with persistent memory, multi-model support, and factual auditing — powered by ChromaDB, Google Gemini, Groq, and OpenAI.
 
-**🚀 Live Demo → [llm-state-manager.streamlit.app](https://llm-state-manager.streamlit.app/)**
-
 ---
 
 ## What It Does
