@@ -39,3 +39,8 @@ def reset(session_id: str):
 @app.get("/models")
 def models():
     return {"models": orc.available_models()}
+
+
+@app.get("/default-model")
+def default_model():
+    return {"default_model": orc.active_model}

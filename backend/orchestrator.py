@@ -20,11 +20,19 @@ class Orchestrator:
         self._cached_models = []
         self.refresh_models()
 
+    DEFAULT_MODEL = "gemini-2.5-flash"
+    
     def refresh_models(self) -> List[str]:
         google_list = get_live_gemini_models()
         groq_list = get_live_groq_models()
         combined = list(set(google_list + groq_list))
         self._cached_models = sorted(combined)
+        
+        # Pre-select the default model after fetching
+        self.active_model = next(
+            (m for m in self._cached_models if "2.5-flash" in m),
+            self._cached_models[0] if self._cached_models else self.DEFAULT_MODEL
+        )
         return self._cached_models
 
     def available_models(self) -> List[str]:

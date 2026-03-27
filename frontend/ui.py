@@ -37,10 +37,16 @@ def run_ui():
         except Exception as e:
             st.error("Failed to sync with backend.")
 
+    models = st.session_state["available_models"]
+    default_index = next(
+        (i for i, m in enumerate(models) if "2.5-flash" in m),
+        0
+    )
+
     active_model = st.sidebar.selectbox(
         "Active model", 
-        st.session_state["available_models"], 
-        index=0,
+        models, 
+        index=default_index,
         help="The 'brain' that will process your next message"
     )
 
