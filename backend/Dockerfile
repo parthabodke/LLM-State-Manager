@@ -1,6 +1,10 @@
-FROM ghcr.io/astral-sh/uv:python3.11-slim
+FROM python:3.11-slim
 
 WORKDIR /app
+
+# Needed for the docker-compose healthcheck
+RUN apt-get update && apt-get install -y --no-install-recommends curl \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install dependencies
 COPY requirements.txt .
